@@ -13,17 +13,17 @@
 ═══════════════════════════════════════════════════════ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#03030a;--bg1:#070710;--bg2:#0c0c1a;--bg3:#121225;
-  --border:rgba(255,255,255,0.07);--border-hi:rgba(255,255,255,0.13);
-  --v:#7c5cfc;--v-hi:#9b7ffe;--v-low:rgba(124,92,252,0.12);--v-glow:rgba(124,92,252,0.4);
-  --teal:#00e5c8;--teal-low:rgba(0,229,200,0.1);
-  --white:#ffffff;--gray:rgba(255,255,255,0.5);--gray-hi:rgba(255,255,255,0.72);
-  --green:#22d672;
+  --bg:#000000;--bg1:#04040e;--bg2:#07071a;--bg3:#0b0b20;
+  --border:rgba(255,255,255,0.055);--border-hi:rgba(255,255,255,0.1);
+  --v:#6b4ff0;--v-hi:#8b72f8;--v-low:rgba(107,79,240,0.1);--v-glow:rgba(107,79,240,0.35);
+  --teal:#4fc3f7;--teal-low:rgba(79,195,247,0.08);
+  --white:#f0f0ff;--gray:rgba(200,205,255,0.38);--gray-hi:rgba(220,225,255,0.65);
+  --green:#4ade80;
   --f-head:'Unbounded',sans-serif;--f-body:'Figtree',sans-serif;--f-mono:'JetBrains Mono',monospace;
   --r:14px;--ease:cubic-bezier(.25,.46,.45,.94);
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--f-body);background:var(--bg);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
+body{font-family:var(--f-body);background:linear-gradient(180deg,#0c0c28 0%,#04040f 40%,#000000 100%);background-attachment:fixed;color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
 a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%}
 
 /* ═══════════════════════════════════════════════════════
@@ -69,13 +69,13 @@ body.cursor-text #cursor-ring{opacity:0}
 /* ═══════════════════════════════════════════════════════
    CANVAS + AURORA + NOISE
 ═══════════════════════════════════════════════════════ */
-#canvas-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.9}
+#canvas-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1}
 .aurora{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
-.aurora-blob{position:absolute;border-radius:50%;filter:blur(80px);animation:auroraDrift 20s ease-in-out infinite alternate}
-.ab1{width:600px;height:500px;background:radial-gradient(ellipse,rgba(124,92,252,.18) 0%,transparent 70%);top:-100px;left:-100px;animation-duration:22s}
-.ab2{width:500px;height:600px;background:radial-gradient(ellipse,rgba(0,229,200,.1) 0%,transparent 70%);top:30%;right:-150px;animation-duration:28s;animation-delay:-8s}
-.ab3{width:700px;height:400px;background:radial-gradient(ellipse,rgba(124,92,252,.12) 0%,transparent 70%);bottom:-50px;left:20%;animation-duration:18s;animation-delay:-5s}
-@keyframes auroraDrift{0%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.08)}66%{transform:translate(-25px,20px) scale(.95)}100%{transform:translate(20px,40px) scale(1.04)}}
+.aurora-blob{position:absolute;border-radius:50%;filter:blur(120px);animation:auroraDrift 26s ease-in-out infinite alternate}
+.ab1{width:700px;height:600px;background:radial-gradient(ellipse,rgba(40,30,120,.22) 0%,transparent 70%);top:-160px;left:-80px;animation-duration:30s}
+.ab2{width:500px;height:700px;background:radial-gradient(ellipse,rgba(20,15,90,.15) 0%,transparent 70%);top:10%;right:-200px;animation-duration:38s;animation-delay:-12s}
+.ab3{width:900px;height:500px;background:radial-gradient(ellipse,rgba(30,20,100,.1) 0%,transparent 70%);bottom:-100px;left:10%;animation-duration:24s;animation-delay:-7s}
+@keyframes auroraDrift{0%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.05)}66%{transform:translate(-18px,14px) scale(.97)}100%{transform:translate(14px,28px) scale(1.03)}}
 .noise{position:fixed;inset:0;z-index:2;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.022}
 
 /* ═══════════════════════════════════════════════════════
@@ -86,11 +86,11 @@ nav{
   width:calc(100% - 40px);max-width:1200px;z-index:500;
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 24px;
-  background:rgba(7,7,16,.8);backdrop-filter:blur(24px);
+  background:rgba(4,4,14,.75);backdrop-filter:blur(28px);
   border:1px solid var(--border);border-radius:18px;
   transition:all .35s var(--ease);
 }
-nav.scrolled{background:rgba(4,4,10,.92);border-color:var(--border-hi);box-shadow:0 8px 40px rgba(0,0,0,.5)}
+nav.scrolled{background:rgba(2,2,10,.9);border-color:var(--border-hi);box-shadow:0 8px 40px rgba(0,0,0,.6)}
 .nav-logo{font-family:var(--f-head);font-size:.85rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:linear-gradient(135deg,var(--white),var(--v-hi));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:28px}
 .nav-center a{font-size:.78rem;font-weight:600;letter-spacing:.04em;color:var(--gray);transition:color .2s;position:relative;padding-bottom:2px}
@@ -104,7 +104,7 @@ nav.scrolled{background:rgba(4,4,10,.92);border-color:var(--border-hi);box-shado
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.mobile-menu{position:fixed;inset:0;z-index:490;background:rgba(3,3,10,.97);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
+.mobile-menu{position:fixed;inset:0;z-index:490;background:rgba(2,2,10,.98);backdrop-filter:blur(24px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
 .mobile-menu.open{opacity:1;pointer-events:all}
 .mobile-menu a{font-family:var(--f-head);font-size:1.6rem;font-weight:700;color:var(--gray-hi);transition:color .2s;letter-spacing:.04em}
 .mobile-menu a:hover{color:var(--white)}
@@ -306,8 +306,44 @@ footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:4
 .toast-icon{flex-shrink:0}
 
 /* ═══════════════════════════════════════════════════════
-   REVEAL ANIMATIONS
+   TEXT ANIMATIONS
 ═══════════════════════════════════════════════════════ */
+/* Typewriter cursor blink */
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* Word-by-word reveal used on hero sub */
+.word-reveal .word{
+  display:inline-block;
+  opacity:0;transform:translateY(12px);
+  animation:wordIn .5s var(--ease) forwards;
+}
+@keyframes wordIn{to{opacity:1;transform:none}}
+
+/* Character split for h1 line 1 */
+.char{display:inline-block;opacity:0;transform:translateY(20px);animation:charIn .45s var(--ease) forwards}
+@keyframes charIn{to{opacity:1;transform:none}}
+
+/* Typewriter on line 2 of h1 */
+.typewriter{
+  display:inline-block;
+  overflow:hidden;
+  white-space:nowrap;
+  width:0;
+  animation:typeExpand .7s steps(9,end) forwards;
+  border-right:3px solid var(--v-hi);
+  animation-fill-mode:forwards;
+}
+.typewriter.done{border-right-color:transparent}
+@keyframes typeExpand{to{width:100%}}
+
+/* Counter number roll */
+@keyframes countUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hstat-num{animation:countUp .6s var(--ease) both}
+.hstat:nth-child(1) .hstat-num{animation-delay:.72s}
+.hstat:nth-child(2) .hstat-num{animation-delay:.82s}
+.hstat:nth-child(3) .hstat-num{animation-delay:.92s}
+.hstat:nth-child(4) .hstat-num{animation-delay:1.02s}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
 .reveal.in{opacity:1;transform:none}
@@ -389,8 +425,8 @@ footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:4
 <!-- ══ HERO ══ -->
 <section class="hero" id="home">
   <div class="hero-badge"><span class="hero-badge-dot"></span>Available for projects</div>
-  <h1 class="hero-h1">Built to<br><span class="line2">dominate.</span></h1>
-  <p class="hero-sub">Elite Roblox developer &amp; full-stack engineer. I build experiences players obsess over and systems that scale without breaking a sweat.</p>
+  <h1 class="hero-h1" id="hero-h1">Built to<br><span class="line2 typewriter" id="hero-line2">dominate.</span></h1>
+  <p class="hero-sub word-reveal" id="hero-sub">Elite Roblox developer &amp; full-stack engineer. I build experiences players obsess over — and systems that don't break.</p>
   <div class="hero-btns">
     <a href="#projects" class="btn-primary">See My Work
       <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
@@ -398,10 +434,10 @@ footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:4
     <a href="#socials" class="btn-secondary">Get in Touch</a>
   </div>
   <div class="hero-stats">
-    <div class="hstat"><span class="hstat-num">200k<em>+</em></span><span class="hstat-lbl">Robux Earned</span></div>
-    <div class="hstat"><span class="hstat-num">500k<em>+</em></span><span class="hstat-lbl">Players Reached</span></div>
-    <div class="hstat"><span class="hstat-num">20<em>+</em></span><span class="hstat-lbl">Projects Shipped</span></div>
-    <div class="hstat"><span class="hstat-num">3<em>+</em></span><span class="hstat-lbl">Years Active</span></div>
+    <div class="hstat"><span class="hstat-num">150k<em>+</em></span><span class="hstat-lbl">Robux Earned</span></div>
+    <div class="hstat"><span class="hstat-num">107k<em>+</em></span><span class="hstat-lbl">Players Reached</span></div>
+    <div class="hstat"><span class="hstat-num">4</span><span class="hstat-lbl">Projects Shipped</span></div>
+    <div class="hstat"><span class="hstat-num">4<em>+</em></span><span class="hstat-lbl">Years Active</span></div>
   </div>
   <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
@@ -427,23 +463,23 @@ footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:4
         </div>
         <div class="about-data">
           <div class="arow"><span class="arow-k">Handle</span><span class="arow-v">Admiral</span></div>
-          <div class="arow"><span class="arow-k">Robux Earned</span><span class="arow-v">200,000+</span></div>
-          <div class="arow"><span class="arow-k">Experience</span><span class="arow-v">3+ years</span></div>
-          <div class="arow"><span class="arow-k">Languages</span><span class="arow-v">7+ stacks</span></div>
-          <div class="arow"><span class="arow-k">Projects</span><span class="arow-v">20+ shipped</span></div>
+          <div class="arow"><span class="arow-k">Robux Earned</span><span class="arow-v">150,000+</span></div>
+          <div class="arow"><span class="arow-k">Experience</span><span class="arow-v">4+ years</span></div>
+          <div class="arow"><span class="arow-k">Languages</span><span class="arow-v">Python, Luau, JS</span></div>
+          <div class="arow"><span class="arow-k">Projects</span><span class="arow-v">4 shipped</span></div>
           <div class="arow"><span class="arow-k">Status</span><span class="arow-v" style="color:var(--green)">● Available</span></div>
         </div>
       </div>
       <div class="about-right reveal">
-        <p>I'm <strong>Admiral</strong> — a developer who started writing Luau scripts on Roblox and never stopped building. Three years in, I've shipped games with hundreds of thousands of players, architected full-stack systems, and earned over <strong>200,000 Robux</strong> doing what I love.</p>
-        <p>My edge is simple: I combine <strong>game design instinct</strong> with real engineering depth. I know what players want before they ask for it, and I know how to build it so it doesn't fall apart under load.</p>
+        <p>I'm <strong>Admiral</strong> — a developer who started with Luau on Roblox and never stopped. Four years in, I've shipped games with over <strong>107,000 players</strong>, earned <strong>150,000+ Robux</strong>, and built things I'm actually proud of.</p>
+        <p>I keep it simple: write clean code, ship fast, and make things people want to use. No bloat, no fluff.</p>
         <div class="codeblock">
           <div class="cb-header">
             <div class="cbd cbd-r"></div><div class="cbd cbd-y"></div><div class="cbd cbd-g"></div>
             <span class="cb-fname">GameController.luau</span>
           </div>
           <div class="cb-body">
-<span class="cmt">-- Admiral's game init  //  (this script is a joke lol)</span><br>
+<span class="cmt">-- Admiral's game init  //  (this is a joke lol)</span><br>
 <span class="kw">local</span> <span class="fn">GameController</span> = {}<br>
 <span class="kw">local</span> Players = game:GetService(<span class="str">"Players"</span>)<br><br>
 <span class="kw">function</span> <span class="fn">GameController</span>:Init(player)<br>
@@ -452,8 +488,7 @@ footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:4
 <span class="kw">end</span>
           </div>
         </div>
-        <p>Beyond Roblox I work across the full web stack — <strong>React, Node.js, Python</strong>, databases, real-time systems, APIs. I've shipped an AI game bot, a real-time chat platform, and developer tooling that people in the community actually depend on.</p>
-        <p>I care about the full cycle: design, architecture, implementation, performance, polish. No half-finished work.</p>
+        <p>Outside of Roblox I work with <strong>Python, HTML, CSS and JavaScript</strong> — enough to build whatever needs building.</p>
       </div>
     </div>
   </div>
@@ -464,12 +499,9 @@ footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:4
     <div class="sec-label reveal">02 — Skills</div>
     <h2 class="sec-h2 reveal">Technical <span>Arsenal</span></h2>
     <div class="skills-wrap stagger">
-      <div class="skill-card"><div class="sc-top"><div class="sc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="5"/><path d="M6 10v4M8 12H4"/><circle cx="15" cy="10.5" r="1" fill="var(--v-hi)" stroke="none"/><circle cx="17.5" cy="12" r="1" fill="var(--teal)" stroke="none"/><circle cx="15" cy="13.5" r="1" fill="var(--v-hi)" stroke="none"/><circle cx="12.5" cy="12" r="1" fill="var(--teal)" stroke="none"/></svg></div><span class="sc-title">Game Development</span></div><div class="chips"><span class="chip">Luau</span><span class="chip">Lua</span><span class="chip">Roblox Studio</span><span class="chip">Game Design</span><span class="chip">UI/UX</span><span class="chip">3D Modeling</span></div></div>
-      <div class="skill-card"><div class="sc-top"><div class="sc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><span class="sc-title">Languages</span></div><div class="chips"><span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">C++</span><span class="chip">TypeScript</span><span class="chip">Java</span><span class="chip">Go</span></div></div>
-      <div class="skill-card"><div class="sc-top"><div class="sc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><span class="sc-title">Web Technologies</span></div><div class="chips"><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">Vue.js</span></div></div>
-      <div class="skill-card"><div class="sc-top"><div class="sc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><span class="sc-title">Backend &amp; Database</span></div><div class="chips"><span class="chip">MongoDB</span><span class="chip">BSON</span><span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip">GraphQL</span><span class="chip">REST APIs</span></div></div>
-      <div class="skill-card"><div class="sc-top"><div class="sc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><span class="sc-title">DevOps &amp; Tools</span></div><div class="chips"><span class="chip">Docker</span><span class="chip">AWS</span><span class="chip">Git</span><span class="chip">CI/CD</span><span class="chip">Linux</span><span class="chip">Kubernetes</span></div></div>
-      <div class="skill-card"><div class="sc-top"><div class="sc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div><span class="sc-title">Design &amp; Creative</span></div><div class="chips"><span class="chip">Blender</span><span class="chip">Photoshop</span><span class="chip">Pixlr</span><span class="chip">UI Design</span><span class="chip">Animation</span><span class="chip">Prototyping</span></div></div>
+      <div class="skill-card"><div class="sc-top"><div class="sc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="5"/><path d="M6 10v4M8 12H4"/><circle cx="15" cy="10.5" r="1" fill="var(--v-hi)" stroke="none"/><circle cx="17.5" cy="12" r="1" fill="var(--teal)" stroke="none"/><circle cx="15" cy="13.5" r="1" fill="var(--v-hi)" stroke="none"/><circle cx="12.5" cy="12" r="1" fill="var(--teal)" stroke="none"/></svg></div><span class="sc-title">Game Dev</span></div><div class="chips"><span class="chip">Luau</span><span class="chip">Roblox Studio</span><span class="chip">Game Design</span><span class="chip">UI/UX</span></div></div>
+      <div class="skill-card"><div class="sc-top"><div class="sc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><span class="sc-title">Languages</span></div><div class="chips"><span class="chip">Python</span><span class="chip">Luau</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div></div>
+      <div class="skill-card"><div class="sc-top"><div class="sc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><span class="sc-title">Web</span></div><div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Node.js</span></div></div>
     </div>
   </div>
 
@@ -479,13 +511,10 @@ footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:4
     <div class="sec-label reveal">03 — Projects</div>
     <h2 class="sec-h2 reveal">Featured <span>Work</span></h2>
     <div class="bento stagger">
-      <div class="pc pc-wide"><div class="pc-arrow">↗</div><div class="pc-num">01</div><div class="pc-name">Elite Combat Arena</div><div class="pc-desc">High-intensity PvP combat game. Advanced weapon systems, skill trees, competitive ranked ladders. 10k+ Rbx revenue, 100k+ players at peak.</div><div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">DataStore</span><span class="ptag">RemoteEvents</span><span class="ptag">GUI Design</span></div></div>
-      <div class="pc pc-narrow"><div class="pc-arrow">↗</div><div class="pc-num">02</div><div class="pc-name">Fantasy RPG World</div><div class="pc-desc">Massive MMO with custom quest systems, character progression, and a full in-game economy with player trading.</div><div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">OrderedDataStore</span><span class="ptag">3D Modeling</span></div></div>
-      <div class="pc pc-third"><div class="pc-arrow">↗</div><div class="pc-num">03</div><div class="pc-name">Real-time Chat</div><div class="pc-desc">Scalable messaging platform — file sharing, voice notes, group rooms, thousands of concurrent connections.</div><div class="pc-tags"><span class="ptag">Node.js</span><span class="ptag">Socket.io</span><span class="ptag">Redis</span></div></div>
-      <div class="pc pc-third"><div class="pc-arrow">↗</div><div class="pc-num">04</div><div class="pc-name">AI Game Bot</div><div class="pc-desc">ML-powered assistant that gives real-time strategy and performance analytics inside a running game session.</div><div class="pc-tags"><span class="ptag">Python</span><span class="ptag">TensorFlow</span><span class="ptag">C++</span></div></div>
-      <div class="pc pc-third"><div class="pc-arrow">↗</div><div class="pc-num">05</div><div class="pc-name">Dev Tools Suite</div><div class="pc-desc">Roblox developer toolkit: code generators, asset managers, performance analyzers. Built for real workflows.</div><div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">Python</span><span class="ptag">API Design</span></div></div>
-      <div class="pc pc-half"><div class="pc-arrow">↗</div><div class="pc-num">06</div><div class="pc-name">GameDev Portfolio Site</div><div class="pc-desc">This site. Performance-first, fully custom — no templates, no cookie-cutter. Pure handcrafted web engineering.</div><div class="pc-tags"><span class="ptag">React</span><span class="ptag">Node.js</span><span class="ptag">MongoDB</span><span class="ptag">CSS3</span></div></div>
-      <div class="pc pc-half"><div class="pc-arrow">↗</div><div class="pc-num">07</div><div class="pc-name">Anti-Cheat Test System</div><div class="pc-desc">Ethical exploit testing framework that stress-tests Roblox anti-cheat implementations to find and patch vulnerabilities.</div><div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">C++</span><span class="ptag">Security</span><span class="ptag">Testing</span></div></div>
+      <div class="pc pc-wide"><div class="pc-arrow">↗</div><div class="pc-num">01</div><div class="pc-name">Elite Combat Arena</div><div class="pc-desc">High-intensity PvP game with weapon systems and ranked ladders. 107k+ players at peak.</div><div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">DataStore</span><span class="ptag">GUI Design</span></div></div>
+      <div class="pc pc-narrow"><div class="pc-arrow">↗</div><div class="pc-num">02</div><div class="pc-name">Fantasy RPG World</div><div class="pc-desc">MMO with quest systems, character progression, and a player-driven economy.</div><div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">DataStore</span></div></div>
+      <div class="pc pc-half"><div class="pc-arrow">↗</div><div class="pc-num">03</div><div class="pc-name">Portfolio Site</div><div class="pc-desc">This site — custom built, no templates.</div><div class="pc-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span></div></div>
+      <div class="pc pc-half"><div class="pc-arrow">↗</div><div class="pc-num">04</div><div class="pc-name">Dev Tools Suite</div><div class="pc-desc">Roblox developer toolkit with code generators and performance analyzers.</div><div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">Python</span></div></div>
     </div>
   </div>
 
@@ -495,12 +524,10 @@ footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:4
     <div class="sec-label reveal">04 — Achievements</div>
     <h2 class="sec-h2 reveal">Track <span>Record</span></h2>
     <div class="ach-grid stagger">
-      <div class="ac"><div class="ac-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="ac-title">200k+ Robux Earned</div><div class="ac-desc">Monetized multiple Roblox projects with strong market execution and player retention strategy.</div></div>
-      <div class="ac"><div class="ac-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="ac-title">500k+ Players Reached</div><div class="ac-desc">Built experiences enjoyed by over half a million players worldwide. Engagement that speaks for itself.</div></div>
-      <div class="ac"><div class="ac-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="ac-title">Featured Developer</div><div class="ac-desc">Recognized by the Roblox community for outstanding contributions to the platform's developer ecosystem.</div></div>
-      <div class="ac"><div class="ac-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div><div class="ac-title">Competition Awards</div><div class="ac-desc">Multiple hackathon and dev competition wins — technical excellence and shipping under pressure.</div></div>
-      <div class="ac"><div class="ac-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="ac-title">Open Source Contributor</div><div class="ac-desc">Published tools used by developers globally. Code that outlives the projects it was written for.</div></div>
-      <div class="ac"><div class="ac-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><div class="ac-title">Tech Mentor</div><div class="ac-desc">Helped dozens of new developers go from zero to shipping. Teaching is the real test of mastery.</div></div>
+      <div class="ac"><div class="ac-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="ac-title">150k+ Robux Earned</div><div class="ac-desc">Across multiple shipped Roblox projects.</div></div>
+      <div class="ac"><div class="ac-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="ac-title">107k+ Players</div><div class="ac-desc">Real players, real engagement, real retention.</div></div>
+      <div class="ac"><div class="ac-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="ac-title">4 Years Active</div><div class="ac-desc">Consistently building and improving since day one.</div></div>
+      <div class="ac"><div class="ac-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--v-hi)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div class="ac-title">4 Projects Shipped</div><div class="ac-desc">Built and launched end-to-end, solo.</div></div>
     </div>
   </div>
 
@@ -603,7 +630,7 @@ const SVG = {
 
   snapchat: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.065.963C8.952.963 6.475 3.302 6.475 6.474c0 .325.027.64.073.948l-.627.144c-.363.082-.706-.165-.784-.528-.015-.063-.02-.127-.016-.19.105-1.5.11-3.04-.616-4.356a4.62 4.62 0 0 0-.09-.154C4.09 1.587 3.416 1.1 2.633.96a.507.507 0 0 0-.09-.006c-.748 0-1.378.51-1.378 1.136 0 .512.384.944.898 1.076.936.238 1.476.762 1.602 1.558.175 1.107-.527 2.104-1.649 2.38-.29.07-.498.33-.498.628 0 .35.29.636.648.636.106 0 .21-.026.302-.073.51-.263 1.035-.395 1.562-.395.356 0 .698.057 1.02.162.016.006.032.01.05.013a4.99 4.99 0 0 1-.047.665c-.26 2.076.748 3.808 2.548 4.667.074.035.152.052.23.052.215 0 .42-.117.523-.322a.575.575 0 0 0-.272-.77c-1.374-.642-2.112-1.986-1.908-3.546.046-.353.05-.69.017-1.01.386-.035.77-.055 1.152-.055.784 0 1.558.1 2.31.295a.643.643 0 0 0 .164.022c.343 0 .62-.273.62-.613 0-.303-.214-.558-.505-.614-.773-.15-1.56-.228-2.35-.234a8.18 8.18 0 0 0-.985.051c.03-.258.046-.52.046-.788 0-2.7 2.094-4.893 4.674-4.893 2.58 0 4.674 2.192 4.674 4.893 0 .267.016.53.047.787a8.18 8.18 0 0 0-.986-.05c-.79.005-1.577.083-2.35.233a.62.62 0 0 0-.505.614c0 .34.278.613.62.613.056 0 .11-.007.164-.022.752-.195 1.526-.295 2.31-.295.382 0 .766.02 1.152.055a6.04 6.04 0 0 1 .017 1.01c.204 1.56-.534 2.904-1.908 3.547a.575.575 0 0 0-.272.77c.104.204.308.32.523.32a.576.576 0 0 0 .23-.05c1.8-.86 2.807-2.592 2.547-4.668a4.99 4.99 0 0 1-.046-.665l.05-.013c.32-.105.663-.162 1.019-.162.527 0 1.052.132 1.563.395.092.047.196.073.302.073.357 0 .648-.285.648-.636 0-.298-.208-.557-.498-.628-1.122-.276-1.824-1.273-1.65-2.38.127-.796.667-1.32 1.603-1.558.514-.132.898-.564.898-1.076C23.35 1.47 22.72.96 21.972.96a.501.501 0 0 0-.09.005c-.783.14-1.456.628-1.782 1.278a4.63 4.63 0 0 0-.09.154c-.727 1.316-.721 2.856-.616 4.357a.574.574 0 0 1-.016.189c-.078.363-.42.61-.784.528l-.627-.144c.046-.307.073-.623.073-.948C17.655 3.302 15.178.963 12.065.963z" fill="currentColor"/></svg>`,
 
-  roblox: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.074 16.573 0 3.074 16.926 0 20 13.499zm7.388.453-1.716-7.25 7.324-1.734 1.716 7.25zM7.25 21 6 15.63l13.5-3.13L21 18z" fill="currentColor"/></svg>`,
+  roblox: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.597 1.166L1 18.115 14.588 21.5 18.163 4.549zM9.741 14.845l-1.62-6.836 6.921-1.638 1.619 6.836z" fill="currentColor"/></svg>`,
 
   github: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="currentColor"/></svg>`,
 
@@ -623,10 +650,6 @@ const BRAND = {
   youtube:   { bg:'linear-gradient(135deg,#ff0000,#cc0000)', color:'#fff', shadow:'rgba(255,0,0,.3)' },
   instagram: { bg:'linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)', color:'#fff', shadow:'rgba(253,29,29,.3)' },
 };
-
-/* Status label text */
-const STATUS_TEXT = { online:'Online', idle:'Idle', dnd:'Do Not Disturb', offline:'Offline' };
-const STATUS_CLASS = { online:'', idle:' idle', dnd:' dnd', offline:' offline' };
 
 /* ── COPY SVG ICON ── */
 const COPY_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
@@ -653,9 +676,6 @@ function buildSocials() {
       const card = document.createElement('div');
       card.className = 'sc-discord' + (s.hidden ? ' sc-hidden' : '');
 
-      const statusDotClass = `status-dot${STATUS_CLASS[s.status] || ' offline'}`;
-      const statusText = STATUS_TEXT[s.status] || 'Offline';
-
       let actionsHTML = '';
       if (!s.hidden) {
         if (s.showCopyBtn) {
@@ -669,8 +689,8 @@ function buildSocials() {
       let linkBadge = '';
       if (s.linkActive !== 'hidden') {
         linkBadge = s.linkActive
-          ? `<span class="sc-card-status" style="margin-left:10px"><span class="sc-card-status-dot" style="background:var(--green)"></span><span style="color:var(--green);font-size:.67rem;font-weight:600">Link Active</span></span>`
-          : `<span class="sc-card-status" style="margin-left:10px"><span class="sc-card-status-dot" style="background:var(--gray)"></span><span style="color:var(--gray);font-size:.67rem;font-weight:600">Link Inactive</span></span>`;
+          ? `<span class="sc-card-status"><span class="sc-card-status-dot" style="background:var(--green)"></span><span style="color:var(--green);font-size:.67rem;font-weight:600">Link Active</span></span>`
+          : `<span class="sc-card-status"><span class="sc-card-status-dot" style="background:var(--gray)"></span><span style="color:var(--gray);font-size:.67rem;font-weight:600">Link Inactive</span></span>`;
       }
 
       card.innerHTML = `
@@ -679,9 +699,6 @@ function buildSocials() {
           <div class="sc-discord-name">${s.username}</div>
           <div class="sc-discord-handle">${s.discordId || ''}</div>
           <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">
-            <div class="sc-discord-status">
-              <span class="${statusDotClass}"></span>${statusText}
-            </div>
             ${linkBadge}
           </div>
         </div>
@@ -723,7 +740,7 @@ function buildSocials() {
       card.style.position = 'relative';
       const lockEl = document.createElement('span');
       lockEl.className = 'sc-locked-badge';
-      lockEl.textContent = '🔒 Hidden for security';
+      lockEl.innerHTML = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:5px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Hidden for security`;
       card.appendChild(lockEl);
     }
 
@@ -744,7 +761,7 @@ function copyText(text, msg = 'Copied to clipboard!') {
 ═════════════════════════════════════════════════════ */
 const canvas = document.getElementById('canvas-bg');
 const ctx = canvas.getContext('2d');
-let W, H, particles = [], shootingStars = [], mouse = {x:-999,y:-999};
+let W, H, particles = [], shootingStars = [], mouse = {x:-9999,y:-9999};
 
 function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight }
 
@@ -752,39 +769,35 @@ class Particle {
   constructor() { this.reset(true) }
   reset(initial = false) {
     this.x = Math.random() * W;
-    this.y = initial ? Math.random() * H : H + 10;
-    this.r = Math.random() * 1.6 + .3;
-    this.vx = (Math.random() - .5) * .15;
-    this.vy = -(Math.random() * .3 + .05);
-    this.opacity = Math.random() * .7 + .1;
+    this.y = initial ? Math.random() * H : -4;
+    this.r = Math.random() * 1.1 + 0.2;
+    this.vx = (Math.random() - .5) * 0.04;
+    this.vy = Math.random() * 0.08 + 0.02;
+    this.baseOpacity = Math.random() * 0.55 + 0.1;
+    this.opacity = this.baseOpacity;
     this.twinkle = Math.random() * Math.PI * 2;
-    this.twinkleSpeed = Math.random() * .02 + .005;
-    this.type = Math.random() < .05 ? 'orb' : 'star';
-    if (this.type === 'orb') { this.r = Math.random() * 3 + 2; this.opacity = Math.random() * .25 + .05 }
+    this.twinkleSpeed = Math.random() * 0.008 + 0.002;
   }
   update() {
-    this.x += this.vx; this.y += this.vy; this.twinkle += this.twinkleSpeed;
-    const dx = this.x - mouse.x, dy = this.y - mouse.y;
-    const d = Math.sqrt(dx*dx + dy*dy);
-    if (d < 90) { const f = (90 - d) / 90; this.x += dx/d * f * .9; this.y += dy/d * f * .9 }
-    if (this.y < -10 || this.x < -50 || this.x > W + 50) this.reset();
+    this.x += this.vx; this.y += this.vy;
+    this.twinkle += this.twinkleSpeed;
+    this.opacity = this.baseOpacity * (0.55 + 0.45 * Math.sin(this.twinkle));
+    if (this.y > H + 4 || this.x < -10 || this.x > W + 10) this.reset();
   }
   draw() {
-    const a = this.opacity * (.6 + .4 * Math.sin(this.twinkle));
-    if (this.type === 'orb') {
-      const g = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.r*4);
-      g.addColorStop(0, `rgba(124,92,252,${a*2})`); g.addColorStop(1, 'rgba(124,92,252,0)');
-      ctx.beginPath(); ctx.arc(this.x,this.y,this.r*4,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
-    } else {
-      ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
-      ctx.fillStyle = `rgba(255,255,255,${a})`; ctx.fill();
-      if (this.r > 1.2 && a > .5) {
-        ctx.strokeStyle = `rgba(255,255,255,${a*.5})`; ctx.lineWidth = .5;
-        ctx.beginPath();
-        ctx.moveTo(this.x-this.r*2,this.y); ctx.lineTo(this.x+this.r*2,this.y);
-        ctx.moveTo(this.x,this.y-this.r*2); ctx.lineTo(this.x,this.y+this.r*2);
-        ctx.stroke();
-      }
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(220,225,255,${this.opacity})`;
+    ctx.fill();
+    /* subtle cross sparkle on the brighter larger dots */
+    if (this.r > 0.85 && this.opacity > 0.38) {
+      ctx.strokeStyle = `rgba(200,210,255,${this.opacity * 0.35})`;
+      ctx.lineWidth = 0.4;
+      const s = this.r * 2.2;
+      ctx.beginPath();
+      ctx.moveTo(this.x - s, this.y); ctx.lineTo(this.x + s, this.y);
+      ctx.moveTo(this.x, this.y - s); ctx.lineTo(this.x, this.y + s);
+      ctx.stroke();
     }
   }
 }
@@ -792,59 +805,51 @@ class Particle {
 class ShootingStar {
   constructor() { this.reset() }
   reset() {
-    this.x=Math.random()*W; this.y=Math.random()*(H*.4);
-    this.len=Math.random()*160+80; this.speed=Math.random()*12+6;
-    this.angle=Math.PI/4+(Math.random()-.5)*.3;
-    this.opacity=0; this.life=0; this.maxLife=Math.random()*40+30;
-    this.active=false; this.delay=Math.random()*600;
+    this.x = Math.random() * W;
+    this.y = Math.random() * (H * .35);
+    this.len = Math.random() * 120 + 60;
+    this.speed = Math.random() * 8 + 4;
+    this.angle = Math.PI / 4 + (Math.random() - .5) * .25;
+    this.opacity = 0; this.life = 0;
+    this.maxLife = Math.random() * 35 + 25;
+    this.active = false;
+    this.delay = Math.random() * 900 + 300;
   }
   update() {
     if (this.delay > 0) { this.delay--; return }
     this.active = true; this.life++;
-    this.x += Math.cos(this.angle)*this.speed; this.y += Math.sin(this.angle)*this.speed;
-    if (this.life < 8) this.opacity = this.life/8;
-    else if (this.life > this.maxLife - 8) this.opacity = (this.maxLife - this.life)/8;
+    this.x += Math.cos(this.angle) * this.speed;
+    this.y += Math.sin(this.angle) * this.speed;
+    if (this.life < 8) this.opacity = this.life / 8;
+    else if (this.life > this.maxLife - 8) this.opacity = (this.maxLife - this.life) / 8;
     else this.opacity = 1;
-    if (this.life >= this.maxLife || this.x > W+100 || this.y > H+100) this.reset();
+    if (this.life >= this.maxLife || this.x > W + 100 || this.y > H + 100) this.reset();
   }
   draw() {
     if (!this.active) return;
-    const tx=this.x-Math.cos(this.angle)*this.len, ty=this.y-Math.sin(this.angle)*this.len;
-    const g=ctx.createLinearGradient(tx,ty,this.x,this.y);
-    g.addColorStop(0,'rgba(255,255,255,0)');
-    g.addColorStop(.6,`rgba(200,190,255,${this.opacity*.4})`);
-    g.addColorStop(1,`rgba(255,255,255,${this.opacity})`);
-    ctx.beginPath(); ctx.moveTo(tx,ty); ctx.lineTo(this.x,this.y);
-    ctx.strokeStyle=g; ctx.lineWidth=1.5; ctx.stroke();
-    const g2=ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,6);
-    g2.addColorStop(0,`rgba(255,255,255,${this.opacity*.9})`); g2.addColorStop(1,'rgba(255,255,255,0)');
-    ctx.beginPath(); ctx.arc(this.x,this.y,6,0,Math.PI*2); ctx.fillStyle=g2; ctx.fill();
+    const tx = this.x - Math.cos(this.angle) * this.len;
+    const ty = this.y - Math.sin(this.angle) * this.len;
+    const g = ctx.createLinearGradient(tx, ty, this.x, this.y);
+    g.addColorStop(0, 'rgba(200,210,255,0)');
+    g.addColorStop(0.7, `rgba(210,220,255,${this.opacity * 0.3})`);
+    g.addColorStop(1, `rgba(240,245,255,${this.opacity * 0.9})`);
+    ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(this.x, this.y);
+    ctx.strokeStyle = g; ctx.lineWidth = 1; ctx.stroke();
   }
 }
 
 function initParticles() {
-  const count = Math.min(Math.floor(W*H/5000), 200);
-  particles = Array.from({length:count}, ()=>new Particle());
-  shootingStars = Array.from({length:6}, ()=>new ShootingStar());
+  /* moderate density — 1 star per 7000px² */
+  const count = Math.min(Math.floor(W * H / 7000), 160);
+  particles = Array.from({length: count}, () => new Particle());
+  shootingStars = Array.from({length: 4}, () => new ShootingStar());
 }
-function drawConnections() {
-  for (let i=0; i<particles.length; i++) {
-    for (let j=i+1; j<particles.length; j++) {
-      const p=particles[i], q=particles[j];
-      const dx=p.x-q.x, dy=p.y-q.y, d=Math.sqrt(dx*dx+dy*dy);
-      if (d < 100) {
-        ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
-        ctx.strokeStyle = `rgba(124,92,252,${(1-d/100)*.04})`; ctx.lineWidth=.5; ctx.stroke();
-      }
-    }
-  }
-}
+
 function animate() {
   requestAnimationFrame(animate);
-  ctx.clearRect(0,0,W,H);
-  shootingStars.forEach(s=>{s.update();s.draw()});
-  drawConnections();
-  particles.forEach(p=>{p.update();p.draw()});
+  ctx.clearRect(0, 0, W, H);
+  shootingStars.forEach(s => { s.update(); s.draw() });
+  particles.forEach(p => { p.update(); p.draw() });
 }
 window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
 window.addEventListener('touchmove',e=>{mouse.x=e.touches[0].clientX;mouse.y=e.touches[0].clientY},{passive:true});
@@ -948,7 +953,27 @@ mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.c
 /* ═════════════════════════════════════════════════════
    TOAST
 ═════════════════════════════════════════════════════ */
-let toastTimer;
+/* ═════════════════════════════════════════════════════
+   TEXT ANIMATIONS
+═════════════════════════════════════════════════════ */
+/* Word-by-word on hero sub */
+(function() {
+  const sub = document.getElementById('hero-sub');
+  if (!sub) return;
+  const text = sub.innerHTML;
+  // split on spaces but preserve &amp; entities
+  const words = text.split(' ');
+  sub.innerHTML = words.map((w, i) =>
+    `<span class="word" style="animation-delay:${.42 + i * .055}s">${w}</span>`
+  ).join(' ');
+})();
+
+/* Remove typewriter cursor after animation ends */
+const tw = document.getElementById('hero-line2');
+if (tw) {
+  tw.addEventListener('animationend', () => tw.classList.add('done'), {once:true});
+}
+
 function showToast(msg = 'Copied to clipboard!') {
   const toast = document.getElementById('toast');
   document.getElementById('toast-msg').textContent = msg;
