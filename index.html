@@ -272,11 +272,40 @@ nav.nav-up{transform:translateX(-50%) translateY(-120%)}
 /* ═══════════════════════════════════════════
    PROJECTS (3D tilt cards)
 ═══════════════════════════════════════════ */
-.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;perspective:1200px}
-.pc{background:var(--bg1);border:1px solid var(--border);border-radius:18px;padding:28px;position:relative;overflow:hidden;transition:border-color .32s var(--spring),background .32s,box-shadow .32s var(--spring);transform-style:preserve-3d;cursor:default}
-.pc::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(124,92,252,.07) 0%,transparent 60%);opacity:0;transition:opacity .35s;pointer-events:none}
-.pc:hover{border-color:rgba(124,92,252,.32);background:var(--bg2);box-shadow:0 20px 56px rgba(0,0,0,.44)}
-.pc:hover::after{opacity:1}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+/* Outer .pc: NO overflow:hidden, NO transform-style:preserve-3d — just tilt target */
+.pc{
+  border-radius:18px;
+  cursor:default;
+  will-change:transform;
+  position:relative;
+  /* Start invisible for stagger — JS tilt overrides transform, opacity handled by stagger */
+  opacity:0;
+}
+/* Inner wrapper: clips content, all visual styles live here */
+.pc-inner{
+  background:var(--bg1);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:28px;
+  position:relative;
+  overflow:hidden;
+  transition:border-color .32s var(--spring),background .32s,box-shadow .32s var(--spring);
+  height:100%;
+}
+.pc-inner::after{
+  content:'';position:absolute;inset:0;pointer-events:none;border-radius:18px;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(124,92,252,.12) 0%,transparent 55%);
+  opacity:0;transition:opacity .3s;
+}
+/* Glare inside pc-inner so it clips correctly */
+.pc-glare{
+  position:absolute;inset:0;border-radius:18px;pointer-events:none;
+  opacity:0;z-index:2;transition:opacity .2s;
+}
+.pc:hover .pc-inner{border-color:rgba(124,92,252,.36);background:var(--bg2)}
+.pc:hover .pc-inner::after{opacity:1}
+.pc:hover .pc-glare{opacity:1}
 .pc-wide{grid-column:span 7}.pc-narrow{grid-column:span 5}.pc-half{grid-column:span 6}.pc-full{grid-column:span 12}
 .pc-num{font-family:var(--f-mono);font-size:.62rem;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;margin-bottom:13px}
 .pc-name{font-family:var(--f-head);font-size:1.06rem;font-weight:700;color:var(--white);margin-bottom:10px;line-height:1.18}
@@ -284,9 +313,8 @@ nav.nav-up{transform:translateX(-50%) translateY(-120%)}
 .pc-tags{display:flex;flex-wrap:wrap;gap:6px}
 .ptag{font-size:.63rem;font-weight:600;padding:3px 9px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid var(--border-hi);color:var(--gray-hi);transition:background .2s,border-color .2s}
 .pc:hover .ptag{background:rgba(107,79,240,.08);border-color:rgba(107,79,240,.22)}
-.pc-arrow{position:absolute;top:20px;right:20px;width:30px;height:30px;border-radius:8px;background:var(--v-low);border:1px solid rgba(124,92,252,.18);display:flex;align-items:center;justify-content:center;color:var(--v-hi);font-size:.9rem;opacity:0;transform:translate(-4px,4px);transition:opacity .25s var(--spring),transform .28s var(--spring)}
+.pc-arrow{position:absolute;top:20px;right:20px;width:30px;height:30px;border-radius:8px;background:var(--v-low);border:1px solid rgba(124,92,252,.18);display:flex;align-items:center;justify-content:center;color:var(--v-hi);font-size:.9rem;opacity:0;transform:translate(-4px,4px);transition:opacity .25s var(--spring),transform .28s var(--spring);z-index:2}
 .pc:hover .pc-arrow{opacity:1;transform:translate(0,0)}
-/* project status tag */
 .pc-status{display:inline-flex;align-items:center;gap:5px;font-family:var(--f-mono);font-size:.6rem;color:var(--green);margin-bottom:10px}
 .pc-status-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse 2s ease infinite}
 
@@ -375,8 +403,11 @@ footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:4
 .reveal.from-right{transform:translateX(32px)}
 .reveal.scale-in{transform:scale(.96)}
 .reveal.in{opacity:1;transform:none}
+/* stagger: opacity fade + translateY on non-PC items */
 .stagger>*{opacity:0;transform:translateY(22px);transition:opacity .6s var(--spring),transform .6s var(--spring)}
-.stagger.in>* {opacity:1;transform:none}
+/* PC cards: opacity managed by pcIO, transform managed by tilt JS — no CSS transform here */
+.bento.stagger>.pc{transform:none}
+.stagger.in>*{opacity:1;transform:none}
 .stagger.in>*:nth-child(1){transition-delay:.02s}
 .stagger.in>*:nth-child(2){transition-delay:.09s}
 .stagger.in>*:nth-child(3){transition-delay:.16s}
@@ -407,8 +438,7 @@ footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:4
   .services-grid{grid-template-columns:1fr}
   .skills-wrap{grid-template-columns:1fr 1fr}
   .bento{grid-template-columns:1fr 1fr!important;gap:12px}
-  .pc-wide,.pc-narrow,.pc-full{grid-column:span 2}.pc-half{grid-column:span 1}
-  .ach-grid{grid-template-columns:repeat(2,1fr)}
+  .pc-wide,.pc-narrow,.pc-full{grid-column:span 2}.pc-half{grid-column:span 1}  .ach-grid{grid-template-columns:repeat(2,1fr)}
   #socials-grid{grid-template-columns:1fr}
   .sc-discord{flex-wrap:wrap;gap:16px}.sc-discord-actions{width:100%;justify-content:flex-start}
   footer{padding:32px 28px}
@@ -445,7 +475,7 @@ footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:4
   .stack-grid{gap:8px;margin-top:32px}
   .stack-item{padding:7px 11px;font-size:.69rem}
   .bento{grid-template-columns:1fr!important;gap:10px}
-  .pc-wide,.pc-narrow,.pc-half,.pc-full{grid-column:span 1}.pc{padding:20px}
+  .pc-wide,.pc-narrow,.pc-half,.pc-full{grid-column:span 1}.pc-inner{padding:20px}
   .pc-name{font-size:.92rem}.pc-desc{font-size:.76rem}
   .ach-grid{grid-template-columns:1fr 1fr;gap:10px}.ac{padding:18px}.ac-title{font-size:.76rem}.ac-desc{font-size:.71rem}.ac-num{font-size:1.3rem}
   .timeline{padding-left:22px}.tl-dot{left:-28px}.tl-item{padding-left:20px;margin-bottom:32px}
@@ -717,33 +747,44 @@ footer{position:relative;z-index:10;border-top:1px solid var(--border);padding:4
   <h2 class="sec-h2 reveal">Featured <span>Work</span></h2>
   <div class="bento stagger">
     <div class="pc pc-wide">
-      <div class="pc-arrow">↗</div>
-      <div class="pc-status"><span class="pc-status-dot"></span>Live</div>
-      <div class="pc-num">01</div>
-      <div class="pc-name">Elite Combat Arena</div>
-      <div class="pc-desc">High-intensity PvP game with deep weapon systems, ranked ladders, seasonal events, and a full DataStore economy. Peaked at 107k+ players across its lifetime.</div>
-      <div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">DataStore</span><span class="ptag">GUI Design</span><span class="ptag">PvP</span></div>
+      <div class="pc-inner">
+        <div class="pc-glare"></div>
+        <div class="pc-arrow">↗</div>
+        <div class="pc-num">01</div>
+        <div class="pc-name">Elite Combat Arena</div>
+        <div class="pc-desc">High-intensity PvP game with deep weapon systems, ranked ladders, seasonal events, and a full DataStore economy. Peaked at 107k+ players across its lifetime.</div>
+        <div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">DataStore</span><span class="ptag">GUI Design</span><span class="ptag">PvP</span></div>
+      </div>
     </div>
     <div class="pc pc-narrow">
-      <div class="pc-arrow">↗</div>
-      <div class="pc-num">02</div>
-      <div class="pc-name">Fantasy RPG World</div>
-      <div class="pc-desc">Immersive MMO-style RPG with quest chains, character progression trees, crafting, and a player-driven in-game economy.</div>
-      <div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">DataStore</span><span class="ptag">RPG</span></div>
+      <div class="pc-inner">
+        <div class="pc-glare"></div>
+        <div class="pc-arrow">↗</div>
+        <div class="pc-num">02</div>
+        <div class="pc-name">Fantasy RPG World</div>
+        <div class="pc-desc">Immersive MMO-style RPG with quest chains, character progression trees, crafting, and a player-driven in-game economy.</div>
+        <div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">DataStore</span><span class="ptag">RPG</span></div>
+      </div>
     </div>
     <div class="pc pc-half">
-      <div class="pc-arrow">↗</div>
-      <div class="pc-num">03</div>
-      <div class="pc-name">Portfolio Site</div>
-      <div class="pc-desc">This site — built from scratch. No frameworks, no templates. Pure HTML, CSS, and JS.</div>
-      <div class="pc-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span></div>
+      <div class="pc-inner">
+        <div class="pc-glare"></div>
+        <div class="pc-arrow">↗</div>
+        <div class="pc-num">03</div>
+        <div class="pc-name">Portfolio Site</div>
+        <div class="pc-desc">This site — built from scratch. No frameworks, no templates. Pure HTML, CSS, and JS.</div>
+        <div class="pc-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span></div>
+      </div>
     </div>
     <div class="pc pc-half">
-      <div class="pc-arrow">↗</div>
-      <div class="pc-num">04</div>
-      <div class="pc-name">Dev Tools Suite</div>
-      <div class="pc-desc">Roblox developer toolkit: code generators, performance profilers, and a DataStore inspector with a GUI.</div>
-      <div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">Python</span><span class="ptag">CLI</span></div>
+      <div class="pc-inner">
+        <div class="pc-glare"></div>
+        <div class="pc-arrow">↗</div>
+        <div class="pc-num">04</div>
+        <div class="pc-name">Dev Tools Suite</div>
+        <div class="pc-desc">Roblox developer toolkit: code generators, performance profilers, and a DataStore inspector with a GUI.</div>
+        <div class="pc-tags"><span class="ptag">Luau</span><span class="ptag">Python</span><span class="ptag">CLI</span></div>
+      </div>
     </div>
   </div>
 </div>
@@ -948,22 +989,76 @@ if (!isTouch) {
 }
 
 /* ══════════════════════════════════════════
-   3D TILT on project cards
+   3D TILT — definitive fix
+   The bug: CSS .stagger>* had transition:transform .6s which
+   fought the RAF loop every frame — killed the effect entirely.
+   Fix: kill CSS transition on mouseenter, RAF runs clean.
 ══════════════════════════════════════════ */
 if (!isTouch) {
   qsa('.pc').forEach(card => {
+    const inner = card.querySelector('.pc-inner');
+    const glare = card.querySelector('.pc-glare');
+    let tX = 0, tY = 0, cX = 0, cY = 0;
+    let raf = null, active = false;
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function tick() {
+      cX = lerp(cX, tX, 0.12);
+      cY = lerp(cY, tY, 0.12);
+
+      card.style.transform = `perspective(600px) rotateX(${cX.toFixed(3)}deg) rotateY(${cY.toFixed(3)}deg) scale3d(1.02,1.02,1.02)`;
+
+      // Directional shadow that moves with the tilt — sells the 3D depth
+      if (inner) {
+        const sx = (cY * -2).toFixed(1);
+        const sy = (cX *  2 + 20).toFixed(1);
+        inner.style.boxShadow = `${sx}px ${sy}px 52px rgba(0,0,0,.62), 0 0 0 1px rgba(107,79,240,.32)`;
+      }
+
+      // Glare: specular highlight sliding across the card surface
+      if (glare) {
+        const gx = (50 + cY * 3.5).toFixed(1);
+        const gy = (50 - cX * 3.5).toFixed(1);
+        glare.style.background = `radial-gradient(ellipse 80% 55% at ${gx}% ${gy}%, rgba(255,255,255,.13) 0%, rgba(200,180,255,.05) 45%, transparent 75%)`;
+        glare.style.opacity = active ? '1' : '0';
+      }
+
+      const settled = !active && Math.abs(cX-tX) < 0.015 && Math.abs(cY-tY) < 0.015;
+      if (settled) {
+        card.style.transform = '';
+        card.style.transition = '';
+        if (inner) inner.style.boxShadow = '';
+        if (glare) glare.style.opacity = '0';
+        raf = null;
+      } else {
+        raf = requestAnimationFrame(tick);
+      }
+    }
+
+    card.addEventListener('mouseenter', () => {
+      active = true;
+      // Kill CSS transition so it doesn't fight our RAF loop
+      card.style.transition = 'opacity .6s';
+      if (!raf) raf = requestAnimationFrame(tick);
+    });
+
     card.addEventListener('mousemove', e => {
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width;
       const y = (e.clientY - r.top)  / r.height;
-      const tX = (y - 0.5) * -10;
-      const tY = (x - 0.5) *  10;
-      card.style.transform = `perspective(800px) rotateX(${tX}deg) rotateY(${tY}deg) translateY(-4px)`;
-      card.style.setProperty('--mx', (x*100)+'%');
-      card.style.setProperty('--my', (y*100)+'%');
-    }, {passive:true});
+      tX = (y - 0.5) * -20;
+      tY = (x - 0.5) *  20;
+      if (inner) {
+        inner.style.setProperty('--mx', (x * 100) + '%');
+        inner.style.setProperty('--my', (y * 100) + '%');
+      }
+    }, { passive: true });
+
     card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
+      active = false;
+      tX = 0; tY = 0;
+      if (!raf) raf = requestAnimationFrame(tick);
     });
   });
 }
@@ -1132,6 +1227,20 @@ const revealIO = new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');revealIO.unobserve(e.target)}});
 },{threshold:.07,rootMargin:'0px 0px -24px 0px'});
 qsa('.reveal,.stagger').forEach(el=>revealIO.observe(el));
+
+// PC cards: fade in via their own observer (stagger handles opacity, tilt handles transform)
+const pcIO = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => {
+        e.target.style.transition = 'opacity .6s var(--spring)';
+        e.target.style.opacity = '1';
+      }, Array.from(qsa('.pc')).indexOf(e.target) * 80);
+      pcIO.unobserve(e.target);
+    }
+  });
+}, { threshold: .1, rootMargin: '0px 0px -20px 0px' });
+qsa('.pc').forEach(c => pcIO.observe(c));
 
 const barIO = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
